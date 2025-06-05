@@ -1,6 +1,7 @@
+'use client'
+
 import { SquareMenu } from 'lucide-react'
 import { Button } from '../ui/button'
-import Link from 'next/link'
 import {
   Drawer,
   DrawerClose,
@@ -8,8 +9,11 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '../ui/drawer'
+import { useRouter } from 'next/navigation'
 
 export default function MenuButton() {
+  const router = useRouter()
+
   return (
     <Drawer direction="top">
       <DrawerTrigger asChild>
@@ -24,29 +28,53 @@ export default function MenuButton() {
           <ul>
             <li className="mb-4">
               <DrawerClose asChild>
-                <Button variant="outline" className="w-full">
-                  <Link href="/">首页</Link>
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => {
+                    router.replace('/')
+                  }}
+                >
+                  首页
                 </Button>
               </DrawerClose>
             </li>
             <li className="mb-4">
               <DrawerClose asChild>
-                <Button variant="outline" className="w-full">
-                  <Link href="/blogs">博客</Link>
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => {
+                    router.replace('/blogs')
+                  }}
+                >
+                  博客
                 </Button>
               </DrawerClose>
             </li>
             <li className="mb-4">
               <DrawerClose asChild>
-                <Button variant="outline" className="w-full">
-                  <Link href="/projects">项目</Link>
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => {
+                    router.replace('/projects')
+                  }}
+                >
+                  项目
                 </Button>
               </DrawerClose>
             </li>
             <li>
               <DrawerClose asChild>
-                <Button variant="outline" className="w-full">
-                  <Link href="/about">关于</Link>
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => {
+                    router.replace('/about')
+                  }}
+                >
+                  关于
                 </Button>
               </DrawerClose>
             </li>
