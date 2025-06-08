@@ -2,9 +2,9 @@
 
 import Link from 'next/link'
 import GitHubButton from '../github-button/github-button'
-import Logo from '../logo/logo'
-import { ModeToggle } from '../mode-toggle/mode-toggle'
-import MenuButton from '../menu-button/menu-button'
+import Logo from '../logo'
+import ModeToggle from '../mode-toggle'
+import MenuButton from '../menu-button'
 
 export default function NavigationBar() {
   return (

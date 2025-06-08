@@ -3,11 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@theme {
-  --color-primary-light: hsl(210 40% 96.1%);
-  --color-primary-dark: hsl(217.2 32.6% 17.5%);
-}
-
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -48,7 +43,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: hsl(210 40% 96.1%);
+  --background: oklch(0.93 0.01 256);
   --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
