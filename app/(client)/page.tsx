@@ -1,5 +1,11 @@
+import FriendLinkMarquee from '@/components/friend-link-marquee'
 import Hero from '@/components/hero'
 
 export default function Page() {
-  return <Hero />
+  return (
+    <div>
+      <Hero />
+      <FriendLinkMarquee />
+    </div>
+  )
 }
