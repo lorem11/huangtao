@@ -18,7 +18,7 @@ export default function Hero() {
             />
           </h1>
           <h4 className="scroll-m-20 text-xl text-center sm:text-start font-semibold tracking-tight mt-5">
-            欢迎来到我的 Blog
+            欢迎来到我的 blog
           </h4>
         </div>
 

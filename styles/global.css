@@ -25,7 +25,7 @@
 }
 
 @theme {
-  --t: 45s;
+  --t: 100s;
   --animate-marquee-first: var(--t) linear infinite calc(var(--t) / -2) marquee-first;
   --animate-marquee-second: var(--t) linear infinite calc(var(--t) * -1) marquee-second;
 }

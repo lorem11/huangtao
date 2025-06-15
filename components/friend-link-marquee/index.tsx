@@ -60,8 +60,16 @@ const data: ItemType[] = [
       'A set of beautifully-designed, accessible components and a code distribution platform. Works with your favorite frameworks. Open Source. Open Code.',
   },
   {
+    href: 'https://www.cult-ui.com/',
+    label: '@cult-ui',
+    avatar: 'https://github.com/nolly-studio.png',
+    avatarFallback: 'CT',
+    description:
+      'A set of beautifully-designed, accessible components and a code distribution platform. Works with your favorite frameworks. Open Source. Open Code.',
+  },
+  {
     href: 'https://vuejs.org',
-    label: '@vue',
+    label: '@vuejs',
     avatar: 'https://github.com/vuejs.png',
     avatarFallback: 'VU',
     description: 'The Progressive JavaScript FrameWork.',

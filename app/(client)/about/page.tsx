@@ -4,7 +4,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
+import { Button } from '@/components/ui/button'
+import { MailIcon } from 'lucide-react'
 import type { Metadata } from 'next'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: '关于 huangtao',
@@ -14,9 +17,9 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <div className="flex flex-col gap-4">
-        <section>
-          <h1 className="pb-2 text-2xl font-bold">关于 huangtao</h1>
+      <h1 className="pb-2 text-2xl font-bold">关于 huangtao</h1>
+      <div className="h-[calc(80vh-60px)] flex">
+        <section className="my-auto w-full border p-4 rounded-xl">
           <Accordion
             type="multiple"
             className="w-full"
@@ -25,13 +28,13 @@ export default function Page() {
             <AccordionItem value="item-1">
               <AccordionTrigger>关于我？</AccordionTrigger>
               <AccordionContent className="flex flex-col gap-4">
-                <p>
+                <p className="text-sm font-light">
                   我是<strong>黄涛</strong>，2024 年本科毕业于
                   <strong>大连海事大学</strong>
                   ，目前前端在职，想从事<strong>React，Next.js</strong>
                   相关的工作。
                 </p>
-                <p>
+                <p className="text-sm font-light">
                   说说我的经历，在学校的时候，我想做后台开发，所以一开始我学习的是
                   Java
                   那一套技术栈。但是毕业后对前端产生了浓厚的兴趣，最后也从事了前端的工作。
@@ -45,31 +48,26 @@ export default function Page() {
             <AccordionItem value="item-2">
               <AccordionTrigger>为什么对前端这么感兴趣？</AccordionTrigger>
               <AccordionContent className="flex flex-col gap-4">
-                <p>
-                  我感觉我天生就是做前端的，一直对于交互，UI，颜色这些东西比较敏感，同时我也喜欢写代码，因此做前端应该是最适合我的。
-                  前端技术本身也是非常有趣的，前端社区是程序员中最具活力的社区。前端的开发体验很不错，基本上能做到所见即所得，
+                <p className="text-sm font-light">
+                  我感觉我天生就是做前端的，一直对于交互，UI，颜色这些东西比较敏感，同时我也喜欢写代码，因此做前端是最适合我的。
+                  前端技术本身也是非常有趣的，前端社区的开发者们是程序员群体中最具活力的一批人，他们造就了如今前端生态圈的大繁荣。前端的开发体验很不错，基本上能做到所见即所得，
                   脑袋中的想法只需几行代码就能得到想要的效果。
-                </p>
-                <p>
-                  All orders are carefully packaged and fully insured. Track
-                  your shipment in real-time through our dedicated tracking
-                  portal.
                 </p>
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
               <AccordionTrigger>如何联系我？</AccordionTrigger>
               <AccordionContent className="flex flex-col gap-4">
-                <p>
-                  We stand behind our products with a comprehensive 30-day
-                  return policy. If you&apos;re not completely satisfied, simply
-                  return the item in its original condition.
+                <p className="text-sm font-light">
+                  你可以通过以下任意一种方式联系我
                 </p>
-                <p>
-                  Our hassle-free return process includes free return shipping
-                  and full refunds processed within 48 hours of receiving the
-                  returned item.
-                </p>
+                <div>
+                  <Button variant="outline" size="icon">
+                    <Link href="mailto:1758042125@qq.com">
+                      <MailIcon />
+                    </Link>
+                  </Button>
+                </div>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
