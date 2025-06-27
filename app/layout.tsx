@@ -1,4 +1,5 @@
 import { ThemeProvider } from '@/components/provider'
+import ToasterWithTheme from '@/components/sonner-toaster-with-theme'
 import '@/styles/global.css'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
@@ -30,6 +31,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
+          <ToasterWithTheme />
         </ThemeProvider>
       </body>
     </html>

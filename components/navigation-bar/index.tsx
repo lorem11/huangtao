@@ -8,12 +8,12 @@ import MenuButton from '../menu-button'
 
 export default function NavigationBar() {
   return (
-    <header className="w-full sticky top-0 backdrop-blur transition-all border-x-0  flex flex-row-reverse sm:flex-row justify-between sm:justify-center z-10 items-center border-b py-2">
-      <div className="sm:mr-[auto] sm:ml-16">
+    <header className="w-full sticky top-0 backdrop-blur transition-all border-x-0  flex flex-row-reverse sm:flex-row justify-between sm:justify-center z-10 items-center border-b py-4">
+      <div className="sm:mr-[auto]">
         <Logo />
       </div>
 
-      <ul className="hidden gap-x-8 text-sm sm:flex">
+      <ul className="hidden gap-x-8 text-lg sm:flex">
         <li>
           <Link
             className="hover:underline hover:underline-offset-4 hover:text-slate-500"

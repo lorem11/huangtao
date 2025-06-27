@@ -89,7 +89,7 @@ function HoverLinkCard({ item }: { item: ItemType }) {
     <HoverCard>
       <HoverCardTrigger asChild>
         <Button variant="link">
-          <Link href={item.href} target="_blank">
+          <Link href={item.href} target="_blank" className="text-lg">
             {item.label}
           </Link>
         </Button>
