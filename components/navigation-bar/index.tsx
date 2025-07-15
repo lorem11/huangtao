@@ -5,8 +5,32 @@ import GitHubButton from '../github-button/github-button'
 import Logo from '../logo'
 import ModeToggle from '../mode-toggle'
 import MenuButton from '../menu-button'
+import GoAdminButton from '../go-admin-button'
+import { cn } from '@/lib/utils'
+import { usePathname } from 'next/navigation'
+
+const navs = [
+  {
+    href: '/',
+    label: '首页',
+  },
+  {
+    href: '/blogs',
+    label: '博客',
+  },
+  {
+    href: '/projects',
+    label: '项目',
+  },
+  {
+    href: '/about',
+    label: '关于',
+  },
+]
 
 export default function NavigationBar() {
+  const path = usePathname()
+
   return (
     <header className="w-full sticky top-0 backdrop-blur transition-all border-x-0  flex flex-row-reverse sm:flex-row justify-between sm:justify-center z-10 items-center border-b py-4">
       <div className="sm:mr-[auto]">
@@ -14,38 +38,19 @@ export default function NavigationBar() {
       </div>
 
       <ul className="hidden gap-x-8 text-lg sm:flex">
-        <li>
-          <Link
-            className="hover:underline hover:underline-offset-4 hover:text-slate-500"
-            href="/"
-          >
-            首页
-          </Link>
-        </li>
-        <li>
-          <Link
-            className="hover:underline hover:underline-offset-4 hover:text-slate-500"
-            href="/blogs"
-          >
-            博客
-          </Link>
-        </li>
-        <li>
-          <Link
-            className="hover:underline hover:underline-offset-4 hover:text-slate-500"
-            href="/projects"
-          >
-            项目
-          </Link>
-        </li>
-        <li>
-          <Link
-            className="hover:underline hover:underline-offset-4 hover:text-slate-500"
-            href="/about"
-          >
-            关于
-          </Link>
-        </li>
+        {navs.map((nav) => (
+          <li key={nav.href}>
+            <Link
+              className={cn(
+                path === nav.href && 'text-slate-500 font-semibold',
+                'hover:text-slate-500 hover:font-semibold'
+              )}
+              href={nav.href}
+            >
+              {nav.label}
+            </Link>
+          </li>
+        ))}
       </ul>
 
       <div className="sm:ml-[auto] sm:mr-16 ml-4 gap-2 flex">
@@ -54,6 +59,7 @@ export default function NavigationBar() {
         </div>
         <ModeToggle />
         <GitHubButton />
+        <GoAdminButton />
       </div>
     </header>
   )
