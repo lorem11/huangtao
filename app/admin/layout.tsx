@@ -9,12 +9,12 @@ export default function Layout({ children }: PropsWithChildren) {
       <div className="flex-none">
         <SideBar />
       </div>
-      <div className="h-[100vh] flex flex-col p-8 pb-0">
+      <div className="h-[100vh] flex flex-col p-8 pb-0 w-[100%]">
         <div className="h-[60px] flex items-center border-b justify-between">
           <BreadCrumb />
           <ModeToggle />
         </div>
-        <main className="overflow-scroll h-[calc(100vh-60px)] mt-4">
+        <main className="overflow-scroll h-[calc(100vh-60px)] mt-4 pr-2">
           {children}
         </main>
       </div>

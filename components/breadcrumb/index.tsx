@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,22 +8,56 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useEffect, useState, Fragment } from 'react'
+
+const segmap: { [x: string]: { label: string; path: string } } = {
+  admin: {
+    label: '管理后台',
+    path: '/admin',
+  },
+  dashboard: {
+    label: '仪表盘',
+    path: '/admin/dashboard',
+  },
+  blogs: {
+    label: '博客管理',
+    path: '/admin/blogs',
+  },
+  tags: {
+    label: '标签管理',
+    path: '/admin/tags',
+  },
+}
 
 export default function BreadCrumb() {
+  const [segs, setSegs] = useState<string[]>([])
+  const pathname = usePathname()
+  useEffect(() => {
+    const segs = pathname.slice(1).split('/')
+    setSegs(segs)
+  }, [pathname])
+
+  const breadcrumbs = segs.slice(0, segs.length - 1)
+  const current = segs[segs.length - 1]
+
   return (
     <div className="py-4">
-      <Breadcrumb className="text-xl">
+      <Breadcrumb>
         <BreadcrumbList>
+          {breadcrumbs.map((seg) => (
+            <Fragment key={seg}>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href={segmap[seg].path}>{segmap[seg].label}</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+            </Fragment>
+          ))}
           <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/components">Components</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+            <BreadcrumbPage>{segmap[current]?.label}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>

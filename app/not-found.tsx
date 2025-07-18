@@ -16,9 +16,7 @@ export default function NotFound() {
 
         <ASCIIArt />
 
-        <div className="text-center">
-          <strong>您访问的资源不存在~</strong>
-        </div>
+        <div className="text-center">您访问的资源不存在~</div>
         <div className="text-center">
           <Link href="/">
             <Button>回到首页</Button>

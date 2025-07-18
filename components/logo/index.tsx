@@ -3,21 +3,32 @@
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { PropsWithChildren, useEffect, useState } from 'react'
 
-export default function Logo() {
+export default function Logo({
+  reverse,
+}: PropsWithChildren<{ reverse?: boolean }>) {
   const { resolvedTheme } = useTheme()
   const [img, setImg] = useState(<></>)
 
   useEffect(() => {
-    const _img =
-      resolvedTheme === 'light' ? (
-        <Image src="/signature.png" alt="logo" width={164} height={40} />
-      ) : (
-        <Image src="/signature-dark.png" alt="logo" width={164} height={40} />
-      )
-
-    setImg(_img)
+    let img = null
+    if (reverse) {
+      img =
+        resolvedTheme === 'light' ? (
+          <Image src="/signature-dark.png" alt="logo" width={164} height={40} />
+        ) : (
+          <Image src="/signature.png" alt="logo" width={164} height={40} />
+        )
+    } else {
+      img =
+        resolvedTheme === 'light' ? (
+          <Image src="/signature.png" alt="logo" width={164} height={40} />
+        ) : (
+          <Image src="/signature-dark.png" alt="logo" width={164} height={40} />
+        )
+    }
+    setImg(img)
   }, [resolvedTheme])
 
   return <Link href="/">{img}</Link>

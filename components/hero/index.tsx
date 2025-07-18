@@ -38,10 +38,10 @@ export default function Hero() {
                 </div>
               </Link>
             </div>
-            <div className="mt-4 flex justify-center">
-              <LogoCarousel />
-            </div>
           </h4>
+          <div className="mt-4 flex justify-center">
+            <LogoCarousel />
+          </div>
         </div>
       </div>
     </>

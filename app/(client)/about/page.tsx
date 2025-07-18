@@ -29,22 +29,25 @@ export default function Page() {
               </AccordionTrigger>
               <AccordionContent className="flex flex-col gap-4">
                 <p>
-                  我是<strong>黄涛</strong>，2024 年本科毕业于
-                  <strong>大连海事大学</strong>
-                  ，目前前端在职，想从事<strong>React，Next.js</strong>
-                  相关的工作。
+                  我是<strong>黄涛</strong>，2024 年本科毕业 ，目前
+                  <strong>前端在职</strong>，现在正在寻找新的
+                  <strong>React 或者 Next.js</strong>
+                  相关的工作。这里是我的
+                  <strong>
+                    <Link href="#">在线简历。</Link>
+                  </strong>
                 </p>
                 <p>
                   说说我的经历，在学校的时候，我想做后台开发，所以一开始我学习的是
                   Java
-                  那一套技术栈。但是毕业后对前端产生了浓厚的兴趣，最后也从事了前端的工作。
-                  到目前为止应该有一年左右的工作经验了。公司用的技术栈是
-                  Vue3，但是我更加喜欢 React， JSX 就是原生的 JavaScript，我觉得
-                  JSX 写起来更灵活。一开始接触 React 是想透过 React 来熟悉 Vue3
-                  的组合式函数写法，从此就喜欢上了 React。
+                  那一套技术栈。毕业后对前端产生了浓厚的兴趣，最后从事了前端开发的工作。
+                  到目前为止有一年左右的工作经验了。公司用的技术栈是
+                  <strong>Vue3</strong>，但是我更加喜欢 React， JSX就是原生的
+                  JavaScript，我觉得JSX写起来更灵活。一开始接触React是想透过React来熟悉Vue3的组合式函数写法，但是我发现我自己比较偏爱React。
                 </p>
               </AccordionContent>
             </AccordionItem>
+
             <AccordionItem value="item-2">
               <AccordionTrigger>
                 <h3>为什么对前端这么感兴趣？</h3>
@@ -57,6 +60,30 @@ export default function Page() {
                 </p>
               </AccordionContent>
             </AccordionItem>
+
+            <AccordionItem value="item-4">
+              <AccordionTrigger>
+                <h3>关于这个站点</h3>
+              </AccordionTrigger>
+              <AccordionContent className="flex flex-col gap-4">
+                <p>
+                  此项目是基于 <strong>Next.js</strong> 构建的全栈{' '}
+                  <strong>Web App</strong>
+                  。这是一个<strong>个人博客网站</strong>
+                  ，我将在此发布文章，主要内容为前端技术。
+                </p>
+                <p>
+                  界面设计参考了{' '}
+                  <strong>
+                    <Link href="https://fuxiaochen.com" target="_blank">
+                      fuxiaochen.com
+                    </Link>{' '}
+                  </strong>
+                  如有侵权，请联系我
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+
             <AccordionItem value="item-3">
               <AccordionTrigger>
                 <h3>如何联系我？</h3>

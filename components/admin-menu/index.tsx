@@ -1,32 +1,58 @@
-import { ChartAreaIcon, HammerIcon, NotebookPenIcon } from 'lucide-react'
+'use client'
+
+import { cn } from '@/lib/utils'
+import {
+  ChartAreaIcon,
+  HammerIcon,
+  NotebookPenIcon,
+  TagIcon,
+} from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 const menu = [
   {
-    label: '统计',
+    label: 'Dashboard',
+    href: '/admin/dashboard',
     icon: <ChartAreaIcon />,
   },
   {
     label: '博客',
+    href: '/admin/blogs',
     icon: <NotebookPenIcon />,
   },
   {
+    label: '标签',
+    href: '/admin/tags',
+    icon: <TagIcon />,
+  },
+  {
     label: '项目',
+    href: '/',
     icon: <HammerIcon />,
   },
 ]
 
 export default function AdminMenu() {
+  const pathname = usePathname()
+
   return (
     <nav>
       <ul>
         {menu.map((m) => (
-          <div
-            key={m.label}
-            className="flex items-center text-xl font-bold mt-4 hover:bg-slate-300 dark:hover:bg-slate-600 py-2 px-8 cursor-pointer rounded-2xl"
-          >
-            {m.icon}
-            <span className="ml-4">{m.label}</span>
-          </div>
+          <Link href={m.href} key={m.label}>
+            <div
+              className={cn(
+                'flex items-center justify-between text-xl font-bold mt-4 hover:bg-accent py-2 px-8 cursor-pointer rounded-2xl',
+                pathname === m.href && 'bg-accent'
+              )}
+            >
+              <div className="bg-accent p-2 rounded-md">{m.icon}</div>
+              <div className="w-[150px] text-center">
+                <span className="ml-4">{m.label}</span>
+              </div>
+            </div>
+          </Link>
         ))}
       </ul>
     </nav>
