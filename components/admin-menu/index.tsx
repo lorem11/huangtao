@@ -17,12 +17,12 @@ const menu = [
     icon: <ChartAreaIcon />,
   },
   {
-    label: '博客',
+    label: '博客管理',
     href: '/admin/blogs',
     icon: <NotebookPenIcon />,
   },
   {
-    label: '标签',
+    label: '标签管理',
     href: '/admin/tags',
     icon: <TagIcon />,
   },

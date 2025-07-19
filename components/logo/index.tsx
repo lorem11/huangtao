@@ -3,7 +3,7 @@
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import Link from 'next/link'
-import { PropsWithChildren, useEffect, useState } from 'react'
+import { PropsWithChildren, useLayoutEffect, useState } from 'react'
 
 export default function Logo({
   reverse,
@@ -11,7 +11,7 @@ export default function Logo({
   const { resolvedTheme } = useTheme()
   const [img, setImg] = useState(<></>)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let img = null
     if (reverse) {
       img =

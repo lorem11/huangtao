@@ -1,9 +1,9 @@
 import { useTheme } from "next-themes";
-import { RefObject, useEffect } from "react";
+import { RefObject, useLayoutEffect } from "react";
 
 export function useReversedTheme(ref: RefObject<HTMLElement | HTMLDivElement | null>) {
   const { resolvedTheme } = useTheme()
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (ref.current) {
       const classList = ref.current.classList
       if (resolvedTheme === 'light') {
