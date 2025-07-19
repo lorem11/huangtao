@@ -1,32 +1,20 @@
 'use client'
 
-import { useTheme } from 'next-themes'
-import { useEffect, useRef } from 'react'
+import {
+  ChevronLeft,
+  ChevronLeftIcon,
+  ChevronRight,
+  LogOutIcon,
+} from 'lucide-react'
+import { startTransition, useRef, useState } from 'react'
 import AdminMenu from '../admin-menu'
+import { useReversedTheme } from '../hooks/useReversedTheme'
 import Logo from '../logo'
 import { Button } from '../ui/button'
-import { LogOutIcon } from 'lucide-react'
 
-export default function SideBar() {
-  const { resolvedTheme } = useTheme()
+function SideBar() {
   const ref = useRef<HTMLElement>(null)
-  useEffect(() => {
-    console.log(resolvedTheme)
-    if (ref.current) {
-      const classList = ref.current.classList
-      if (resolvedTheme === 'light') {
-        classList.add('dark')
-      }
-
-      if (resolvedTheme === 'dark') {
-        classList.add('light')
-      }
-
-      return () => {
-        classList.remove('dark', 'light')
-      }
-    }
-  }, [resolvedTheme])
+  useReversedTheme(ref)
 
   return (
     <aside
@@ -43,5 +31,28 @@ export default function SideBar() {
         </Button>
       </div>
     </aside>
+  )
+}
+
+export default function AdminSideBar() {
+  const [expand, setExpand] = useState(false)
+  const expandButtonRef = useRef<HTMLDivElement>(null)
+  useReversedTheme(expandButtonRef)
+
+  return (
+    <div className="relative h-full">
+      {expand && <SideBar />}
+      <div
+        ref={expandButtonRef}
+        className="w-[24px] h-[100px] bg-background absolute right-0 top-[50%] -translate-y-[50%] translate-x-[calc(90%-1px)] rounded-r-lg"
+      >
+        <button
+          className="text-primary h-full"
+          onClick={() => setExpand(!expand)}
+        >
+          {expand ? <ChevronLeftIcon /> : <ChevronRight />}
+        </button>
+      </div>
+    </div>
   )
 }

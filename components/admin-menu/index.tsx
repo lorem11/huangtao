@@ -12,7 +12,7 @@ import { usePathname } from 'next/navigation'
 
 const menu = [
   {
-    label: 'Dashboard',
+    label: '仪表盘',
     href: '/admin/dashboard',
     icon: <ChartAreaIcon />,
   },
