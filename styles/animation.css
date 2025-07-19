@@ -1,0 +1,76 @@
+/* 定义动画组行为 */
+::view-transition-group(.slide-in),
+::view-transition-group(.slide-out) {
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+  overflow: clip;
+}
+
+/* 设置伪元素占满容器 */
+::view-transition-old(.slide-in),
+::view-transition-new(.slide-in),
+::view-transition-old(.slide-out),
+::view-transition-new(.slide-out) {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+}
+
+/* Slide‑in：旧状态保持原位，新状态从右侧滑入 */
+::view-transition-old(.slide-in) {
+  /* 可以淡出或保持不动 */
+}
+::view-transition-new(.slide-in) {
+  animation-name: slide-in-from-left;
+}
+
+/* Slide‑out：旧状态向左滑出，退出场景用 */
+::view-transition-old(.slide-out) {
+  animation-name: slide-out-to-left;
+}
+::view-transition-new(.slide-out) {
+  /* 新状态默认为空白或淡入 */
+}
+
+@keyframes slide-in-from-left {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out-to-left {
+  from {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes marquee-first {
+  0% {
+    transform: translateX(100%);
+  }
+  
+  100% {
+    transform: translateX(-100%);
+  }
+  
+}
+
+@keyframes marquee-second {
+  0% {
+    transform: translateX(0);
+  }
+  
+  100% {
+    transform: translateX(-200%);
+  }
+}
