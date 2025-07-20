@@ -64,7 +64,7 @@ export default function Page() {
                         {...form.register('name')}
                       />
                     </FormControl>
-                    <FormDescription>
+                    <FormDescription className="text-primary">
                       填写标签名称如 Next.js, 标签将展示为 #Next.js
                     </FormDescription>
                     <FormMessage />
@@ -86,7 +86,9 @@ export default function Page() {
                         {...form.register('slug')}
                       />
                     </FormControl>
-                    <FormDescription>slug 应为 "kebab-case"</FormDescription>
+                    <FormDescription className="text-primary">
+                      slug 应为 "kebab-case"
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -110,7 +112,7 @@ export default function Page() {
                       </FormControl>
                       <FormLabel
                         htmlFor="icon"
-                        className="bg-primary text-primary-foreground justify-center w-9 rounded-sm"
+                        className="bg-slate-400 text-primary-foreground justify-center w-9 rounded-sm"
                       >
                         <PlusIcon />
                       </FormLabel>
@@ -121,7 +123,7 @@ export default function Page() {
                         className="hidden"
                       />
                     </div>
-                    <FormDescription>
+                    <FormDescription className="text-primary">
                       你可以手动填写 url 链接，或者点击右侧按钮上传，icon 只支持
                       svg 格式
                     </FormDescription>
@@ -146,7 +148,7 @@ export default function Page() {
                       </FormControl>
                       <FormLabel
                         htmlFor="icon-dark"
-                        className="bg-primary text-primary-foreground justify-center w-9 rounded-sm"
+                        className="bg-slate-400 text-primary-foreground justify-center w-9 rounded-sm"
                       >
                         <PlusIcon />
                       </FormLabel>
@@ -163,7 +165,7 @@ export default function Page() {
               ></FormField>
             </div>
           </div>
-          <Button className="mt-5" type="submit">
+          <Button className="mt-5 bg-slate-400" type="submit">
             添加标签
           </Button>
         </form>
