@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
         permanent: true
       }
     ]
+  },
+  experimental: {
+    viewTransition: true
   }
 };
 

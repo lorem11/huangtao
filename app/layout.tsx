@@ -1,6 +1,8 @@
 import { ThemeProvider } from '@/components/provider'
 import ToasterWithTheme from '@/components/sonner-toaster-with-theme'
 import '@/styles/global.css'
+import '@/styles/animation.css'
+import '@/styles/theme.css'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 

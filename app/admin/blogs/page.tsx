@@ -1,3 +1,3 @@
 export default function Page() {
-  return <h1>博客管理</h1>
+  return <h1>所有文章</h1>
 }

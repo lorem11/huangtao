@@ -50,7 +50,7 @@ export default function Page() {
 
             <AccordionItem value="item-2">
               <AccordionTrigger>
-                <h3>为什么对前端这么感兴趣？</h3>
+                <h3>为什么喜欢前端？</h3>
               </AccordionTrigger>
               <AccordionContent className="flex flex-col gap-4">
                 <p>
@@ -63,7 +63,7 @@ export default function Page() {
 
             <AccordionItem value="item-4">
               <AccordionTrigger>
-                <h3>关于这个站点</h3>
+                <h3>关于这个站点？</h3>
               </AccordionTrigger>
               <AccordionContent className="flex flex-col gap-4">
                 <p>
