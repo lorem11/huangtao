@@ -18,7 +18,9 @@ export default function ThemeSwitch() {
       <div
         className={cn(
           'w-5 h-5 rounded-[10px] absolute top-[50%] -translate-y-[50%] transition-transform',
-          resolvedTheme === 'dark' ? 'translate-x-[24px]' : 'translate-x-[2px]',
+          resolvedTheme === 'light'
+            ? 'translate-x-[2px]'
+            : 'translate-x-[27px]',
           resolvedTheme === 'light' ? 'bg-slate-200' : 'bg-slate-700'
         )}
       >

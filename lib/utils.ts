@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
+import dayjs from "dayjs"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -19,4 +20,8 @@ export function copyToClipBoard(text: string) {
 
     return Promise.resolve()
   }
+}
+
+export function formatDate(date: Date | number) {
+  return dayjs(date).locale("zh-cn").format("YYYY年M月D日 HH:mm:ss");
 }
