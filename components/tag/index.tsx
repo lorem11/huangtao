@@ -14,7 +14,7 @@ export default function Tag({
   const { resolvedTheme } = useTheme()
 
   return (
-    <div className="flex gap-2 items-center w-fit border">
+    <div className="flex gap-2 items-center w-fit border p-1 rounded-[20px] bg-accent">
       # {name} {icon && <Image src={icon} width={15} height={15} alt="" />}
     </div>
   )

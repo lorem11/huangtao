@@ -9,6 +9,18 @@ import {
 } from '@tanstack/react-table'
 
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
+
+import {
   Table,
   TableBody,
   TableCell,
@@ -93,9 +105,25 @@ export default function TagsTable({ data }: { data: Tag[] }) {
       header: '操作',
       cell: ({ row }) => (
         <>
-          <Button variant="destructive" size="icon">
-            <Trash2Icon />
-          </Button>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="destructive" size="icon">
+                <Trash2Icon />
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>确定要删除这个标签？</AlertDialogTitle>
+                <AlertDialogDescription>点击确认删除</AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>取消</AlertDialogCancel>
+                <AlertDialogAction onClick={() => console.log('click')}>
+                  确认
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
           <Button
             variant="outline"
             className="ml-5"

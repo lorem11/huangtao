@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { PlusIcon } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 z.config(z.locales.zhCN())
 const formSchema = z.object({
@@ -30,23 +31,30 @@ const formSchema = z.object({
   iconDark: z.url({ protocol: /^https|http$/ }).optional(),
 })
 
-type tagType = z.infer<typeof formSchema>
+export type tagType = z.infer<typeof formSchema>
 
-export default function CreateTagForm() {
+export default function CreateOrUpdateTagForm({
+  initialValue,
+}: {
+  initialValue?: tagType
+}) {
+  const router = useRouter()
   const form = useForm<tagType>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
+    defaultValues: initialValue ?? {
       name: '',
       slug: '',
     },
   })
+
+  const isUpdate = !!initialValue
 
   function onSubmit(values: tagType) {
     console.log(values)
   }
   return (
     <>
-      <h1>添加标签</h1>
+      {!isUpdate && <h1>添加标签</h1>}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="flex w-full gap-5">
@@ -56,12 +64,16 @@ export default function CreateTagForm() {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>标签名称</FormLabel>
+                    <FormLabel htmlFor="name">
+                      标签名称<span className="text-red-500 font-bold">*</span>
+                    </FormLabel>
                     <FormControl>
                       <Input
+                        id="name"
                         placeholder="Next.js"
                         {...field}
                         {...form.register('name')}
+                        required
                       />
                     </FormControl>
                     <FormDescription className="text-primary">
@@ -78,12 +90,16 @@ export default function CreateTagForm() {
                 name="slug"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>slug</FormLabel>
+                    <FormLabel htmlFor="slug">
+                      slug<span className="text-red-500 font-bold">*</span>
+                    </FormLabel>
                     <FormControl>
                       <Input
+                        id="slug"
                         placeholder="next-js"
                         {...field}
                         {...form.register('slug')}
+                        required
                       />
                     </FormControl>
                     <FormDescription className="text-primary">
@@ -112,7 +128,7 @@ export default function CreateTagForm() {
                       </FormControl>
                       <FormLabel
                         htmlFor="icon"
-                        className="bg-slate-400 text-primary-foreground justify-center w-9 rounded-sm"
+                        className="bg-secondary text-primary outline justify-center w-9 rounded-lg"
                       >
                         <PlusIcon />
                       </FormLabel>
@@ -148,7 +164,7 @@ export default function CreateTagForm() {
                       </FormControl>
                       <FormLabel
                         htmlFor="icon-dark"
-                        className="bg-slate-400 text-primary-foreground justify-center w-9 rounded-sm"
+                        className="bg-secondary text-primary outline justify-center w-9 rounded-lg"
                       >
                         <PlusIcon />
                       </FormLabel>
@@ -165,9 +181,19 @@ export default function CreateTagForm() {
               ></FormField>
             </div>
           </div>
-          <Button className="mt-5 bg-slate-400" type="submit">
-            添加标签
+          <Button className="mt-5 border" type="submit" variant="secondary">
+            {isUpdate ? '确认修改' : '添加标签'}
           </Button>
+          {isUpdate && (
+            <Button
+              className="mt-5 ml-5 border"
+              type="button"
+              variant="secondary"
+              onClick={() => router.back()}
+            >
+              取消
+            </Button>
+          )}
         </form>
       </Form>
     </>
