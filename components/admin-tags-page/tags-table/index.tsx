@@ -10,7 +10,6 @@ import {
 
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -20,6 +19,8 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 
+import LoadingButton from '@/components/loading-button'
+import Tag from '@/components/tag'
 import {
   Table,
   TableBody,
@@ -30,15 +31,18 @@ import {
 } from '@/components/ui/table'
 import { BanIcon, Edit3Icon, Trash2Icon } from 'lucide-react'
 import Image from 'next/image'
-import { Button } from '../../ui/button'
-import { getAllTags } from '../actions'
-import Tag from '@/components/tag'
 import { useRouter } from 'next/navigation'
+import { useState, useTransition } from 'react'
+import { toast } from 'sonner'
+import { Button } from '../../ui/button'
+import { deleteById, getAllTags } from '../actions'
 
 export type Tag = Awaited<ReturnType<typeof getAllTags>>[number]
 
 export default function TagsTable({ data }: { data: Tag[] }) {
+  const [pending, startTransition] = useTransition()
   const router = useRouter()
+  const [open, setOpen] = useState(false)
 
   const columns: ColumnDef<Tag>[] = [
     {
@@ -105,7 +109,7 @@ export default function TagsTable({ data }: { data: Tag[] }) {
       header: '操作',
       cell: ({ row }) => (
         <>
-          <AlertDialog>
+          <AlertDialog open={open} onOpenChange={setOpen}>
             <AlertDialogTrigger asChild>
               <Button variant="destructive" size="icon">
                 <Trash2Icon />
@@ -118,9 +122,23 @@ export default function TagsTable({ data }: { data: Tag[] }) {
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>取消</AlertDialogCancel>
-                <AlertDialogAction onClick={() => console.log('click')}>
+
+                <LoadingButton
+                  pending={pending}
+                  onClick={() => {
+                    console.log('clicked')
+                    startTransition(async () => {
+                      const id = row.getValue('id') as string
+                      await deleteById(id)
+                      startTransition(() => {
+                        toast.success('删除成功')
+                        setOpen(false)
+                      })
+                    })
+                  }}
+                >
                   确认
-                </AlertDialogAction>
+                </LoadingButton>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
@@ -148,7 +166,7 @@ export default function TagsTable({ data }: { data: Tag[] }) {
 
   return (
     <>
-      <h1>所有标签</h1>
+      <h1>所有标签 pending: {pending.toString()}</h1>
       <div className="rounded-md border">
         <Table>
           <TableHeader>

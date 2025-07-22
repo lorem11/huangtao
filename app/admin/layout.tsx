@@ -1,8 +1,8 @@
-import BreadCrumb from '@/components/breadcrumb'
-import ModeToggle from '@/components/mode-toggle'
 import AdminSideBar from '@/components/admin-side-bar'
-import { PropsWithChildren } from 'react'
+import BreadCrumb from '@/components/breadcrumb'
 import ThemeSwitch from '@/components/liaght-dark-mode-switch'
+import ToasterWithTheme from '@/components/sonner-toaster-with-theme'
+import { PropsWithChildren } from 'react'
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
@@ -19,6 +19,7 @@ export default function Layout({ children }: PropsWithChildren) {
           {children}
         </main>
       </div>
+      <ToasterWithTheme />
     </div>
   )
 }

@@ -103,7 +103,7 @@ export default function CreateOrUpdateTagForm({
                       />
                     </FormControl>
                     <FormDescription className="text-primary">
-                      slug 应为 "kebab-case"
+                      slug 应为 &ldquo;kebab-case&ldquo;
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -140,8 +140,8 @@ export default function CreateOrUpdateTagForm({
                       />
                     </div>
                     <FormDescription className="text-primary">
-                      你可以手动填写 url 链接，或者点击右侧按钮上传，icon 只支持
-                      svg 格式
+                      你可以手动填写 url 链接，或者点击右侧按钮上传，icon
+                      建议使用 svg 格式
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
