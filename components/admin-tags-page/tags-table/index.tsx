@@ -166,7 +166,7 @@ export default function TagsTable({ data }: { data: Tag[] }) {
 
   return (
     <>
-      <h1>所有标签 pending: {pending.toString()}</h1>
+      <h1>所有标签</h1>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
