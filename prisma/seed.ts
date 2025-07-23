@@ -1,28 +1,30 @@
-import { PrismaClient, Prisma } from "@/app/generated/prisma";
+import { PrismaClient, Prisma } from '@/app/generated/prisma'
 
 const prisma = new PrismaClient()
-const postData: Prisma.PostCreateInput[] = [{
-  title: 'Next.js攻略流程解说',
-  content: 'lorem ipsum',
-  slug: 'next-js-tutorial'
-}]
 
-const tagData: Prisma.TagCreateInput[] = [{
-  name: 'Next.js',
-  slug: 'next-js',
-  Post: {
-    create: {
-      title: 'Next.js攻略流程解说',
-      content: 'lorem ipsum',
-      slug: 'next-js-tutorial'
-    }
-  }
-}];
+const tagData: Prisma.TagCreateInput[] = [
+  {
+    name: 'Next.js',
+    slug: 'next-js',
+    icon: 'http://localhost:3000/nextjs.svg',
+    iconDark: 'http://localhost:3000/nextjs.svg',
+  },
+  {
+    name: 'react',
+    slug: 'react',
+    icon: 'http://localhost:3000/nextjs.svg',
+    iconDark: 'http://localhost:3000/nextjs.svg',
+  },
+  {
+    name: 'TailwindCSS',
+    slug: 'tailwind-css',
+    icon: 'http://localhost:3000/nextjs.svg',
+    iconDark: 'http://localhost:3000/nextjs.svg',
+  },
+]
 
-(async () => {
+;(async () => {
   for (const t of tagData) {
     await prisma.tag.create({ data: t })
   }
 })()
-
-

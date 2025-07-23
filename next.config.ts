@@ -1,4 +1,4 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -7,13 +7,16 @@ const nextConfig: NextConfig = {
       {
         source: '/admin',
         destination: '/admin/dashboard',
-        permanent: true
-      }
+        permanent: true,
+      },
     ]
   },
   experimental: {
-    viewTransition: true
-  }
-};
+    viewTransition: true,
+  },
+  images: {
+    remotePatterns: [new URL('http://localhost:3000/**')],
+  },
+}
 
-export default nextConfig;
+export default nextConfig
