@@ -24,10 +24,10 @@ export default function Tag({
     <div className="flex gap-2 items-center w-fit border p-1 rounded-[20px] bg-accent">
       # {name}{' '}
       {icon && resolvedTheme === 'light' && (
-        <Image src={icon} width={15} height={15} alt="" />
+        <Image src={icon} width={24} height={24} alt="" unoptimized />
       )}{' '}
       {iconDark && resolvedTheme === 'dark' && (
-        <Image src={iconDark} width={15} height={15} alt="" />
+        <Image src={iconDark} width={24} height={24} alt="" unoptimized />
       )}
     </div>
   )

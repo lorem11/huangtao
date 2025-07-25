@@ -46,11 +46,6 @@ export default function TagsTable({ data }: { data: Tag[] }) {
 
   const columns: ColumnDef<Tag>[] = [
     {
-      accessorKey: 'id',
-      header: 'id',
-      cell: ({ row }) => row.getValue('id'),
-    },
-    {
       accessorKey: 'name',
       header: '标签名称',
       cell: ({ row }) => row.getValue('name'),
@@ -69,7 +64,8 @@ export default function TagsTable({ data }: { data: Tag[] }) {
             src={row.getValue('icon')}
             width={24}
             height={24}
-            alt="图标获取失败"
+            alt=""
+            unoptimized
           />
         ) : (
           <BanIcon />
@@ -84,7 +80,8 @@ export default function TagsTable({ data }: { data: Tag[] }) {
             src={row.getValue('iconDark')}
             width={24}
             height={24}
-            alt="图标获取失败"
+            alt=""
+            unoptimized
           />
         ) : (
           <BanIcon />

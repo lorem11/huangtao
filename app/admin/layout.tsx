@@ -2,7 +2,6 @@ import AdminSideBar from '@/components/admin-side-bar'
 import BreadCrumb from '@/components/breadcrumb'
 import ThemeSwitch from '@/components/liaght-dark-mode-switch'
 import SessionProvider from '@/components/provider/session-provider'
-import ToasterWithTheme from '@/components/sonner-toaster-with-theme'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import { PropsWithChildren } from 'react'
@@ -28,7 +27,6 @@ export default async function Layout({ children }: PropsWithChildren) {
             {children}
           </main>
         </div>
-        <ToasterWithTheme />
       </div>
     </SessionProvider>
   )

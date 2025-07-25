@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
     viewTransition: true,
   },
   images: {
-    remotePatterns: [new URL('http://localhost:3000/**')],
+    remotePatterns: [new URL('https://8hgkm4p86z.ufs.sh/f/**')],
   },
 }
 

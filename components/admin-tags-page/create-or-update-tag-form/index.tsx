@@ -1,9 +1,11 @@
 'use client'
 
+import { UploadButton } from '@/components/uploadthing'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import z from 'zod'
 
+import LoadingButton from '@/components/loading-button'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -15,8 +17,10 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { PlusIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
+import { useTransition } from 'react'
+import { createTag } from '../actions'
 
 z.config(z.locales.zhCN())
 const formSchema = z.object({
@@ -31,27 +35,33 @@ const formSchema = z.object({
   iconDark: z.url({ protocol: /^https|http$/ }).optional(),
 })
 
-export type tagType = z.infer<typeof formSchema>
+export type TagForm = z.infer<typeof formSchema>
 
 export default function CreateOrUpdateTagForm({
   initialValue,
 }: {
-  initialValue?: tagType
+  initialValue?: TagForm
 }) {
   const router = useRouter()
-  const form = useForm<tagType>({
+  const [pending, startTransition] = useTransition()
+  const form = useForm<TagForm>({
     resolver: zodResolver(formSchema),
     defaultValues: initialValue ?? {
       name: '',
       slug: '',
+      icon: '',
+      iconDark: '',
     },
   })
 
   const isUpdate = !!initialValue
 
-  function onSubmit(values: tagType) {
-    console.log(values)
+  function onSubmit(data: TagForm) {
+    startTransition(async () => {
+      await createTag(data)
+    })
   }
+
   return (
     <>
       {!isUpdate && <h1>添加标签</h1>}
@@ -74,6 +84,7 @@ export default function CreateOrUpdateTagForm({
                         {...field}
                         {...form.register('name')}
                         required
+                        aria-required
                       />
                     </FormControl>
                     <FormDescription className="text-primary">
@@ -100,6 +111,7 @@ export default function CreateOrUpdateTagForm({
                         {...field}
                         {...form.register('slug')}
                         required
+                        aria-required
                       />
                     </FormControl>
                     <FormDescription className="text-primary">
@@ -123,25 +135,27 @@ export default function CreateOrUpdateTagForm({
                       <FormControl>
                         <Input
                           placeholder="eg. https://oss.aliyun.com/dasfasdfas"
+                          className="focus-visible:ring-0 cursor-not-allowed"
+                          readOnly
+                          aria-readonly
                           {...field}
                         />
                       </FormControl>
-                      <FormLabel
-                        htmlFor="icon"
-                        className="bg-secondary text-primary outline justify-center w-9 rounded-lg"
-                      >
-                        <PlusIcon />
-                      </FormLabel>
-                      <Input
-                        id="icon"
-                        type="file"
-                        accept=".svg"
-                        className="hidden"
+                      <UploadButton
+                        endpoint="imageUploader"
+                        onClientUploadComplete={(res) => {
+                          // Do something with the response
+                          form.setValue('icon', res[0].ufsUrl)
+                          toast.success('上传成功')
+                        }}
+                        onUploadError={() => {
+                          // Do something with the error.
+                          toast.success('上传失败')
+                        }}
                       />
                     </div>
                     <FormDescription className="text-primary">
-                      你可以手动填写 url 链接，或者点击右侧按钮上传，icon
-                      建议使用 svg 格式
+                      点击右侧按钮上传，icon 建议使用 svg 格式
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -159,20 +173,23 @@ export default function CreateOrUpdateTagForm({
                       <FormControl>
                         <Input
                           placeholder="eg. https://oss.aliyun.com/dasfasdfas"
+                          className="focus-visible:ring-0 cursor-not-allowed"
+                          readOnly
+                          aria-readonly
                           {...field}
                         />
                       </FormControl>
-                      <FormLabel
-                        htmlFor="icon-dark"
-                        className="bg-secondary text-primary outline justify-center w-9 rounded-lg"
-                      >
-                        <PlusIcon />
-                      </FormLabel>
-                      <Input
-                        id="icon-dark"
-                        type="file"
-                        accept=".svg"
-                        className="hidden"
+                      <UploadButton
+                        endpoint="imageUploader"
+                        onClientUploadComplete={(res) => {
+                          // Do something with the response
+                          form.setValue('iconDark', res[0].ufsUrl)
+                          toast.success('上传成功')
+                        }}
+                        onUploadError={() => {
+                          // Do something with the error.
+                          toast.success('上传失败')
+                        }}
                       />
                     </div>
                     <FormMessage />
@@ -181,14 +198,17 @@ export default function CreateOrUpdateTagForm({
               ></FormField>
             </div>
           </div>
-          <Button className="mt-5 border" type="submit" variant="secondary">
+          <LoadingButton
+            className="mt-5 border"
+            type="submit"
+            pending={pending}
+          >
             {isUpdate ? '确认修改' : '添加标签'}
-          </Button>
+          </LoadingButton>
           {isUpdate && (
             <Button
               className="mt-5 ml-5 border"
               type="button"
-              variant="secondary"
               onClick={() => router.back()}
             >
               取消
