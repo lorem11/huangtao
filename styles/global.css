@@ -1,12 +1,17 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+@import 'uploadthing/tw/v4';
+@source "../node_modules/@uploadthing/react/dist";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme {
   --t: 100s;
-  --animate-marquee-first: var(--t) linear infinite calc(var(--t) / -2) marquee-first;
-  --animate-marquee-second: var(--t) linear infinite calc(var(--t) * -1) marquee-second;
+  --animate-marquee-first: var(--t) linear infinite calc(var(--t) / -2)
+    marquee-first;
+  --animate-marquee-second: var(--t) linear infinite calc(var(--t) * -1)
+    marquee-second;
   --animate-spin: 1s linear infinite spin;
 }
 
@@ -58,26 +63,25 @@
 }
 
 h1 {
-  @apply text-2xl font-bold
+  @apply text-2xl font-bold;
 }
 
 h3 {
-  @apply text-xl
+  @apply text-xl;
 }
 
 p {
-  @apply text-lg
+  @apply text-lg;
 }
 
 button {
-  @apply cursor-pointer
+  @apply cursor-pointer;
 }
 
 strong {
-  @apply text-sky-400
+  @apply text-sky-400;
 }
 
 svg#wx-icon > path {
   fill: var(--primary);
 }
-
