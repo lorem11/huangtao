@@ -10,13 +10,11 @@ export default function Layout({
   modal: React.ReactNode
 }) {
   return (
-    <>
-      <div className="flex flex-col gap-5">
-        {children}
-        {form}
-        {table}
-        {modal}
-      </div>
-    </>
+    <div className="flex flex-col gap-5">
+      {children}
+      {form}
+      {table}
+      {modal}
+    </div>
   )
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import { ChevronLeftIcon, ChevronRightIcon, LogOutIcon } from 'lucide-react'
+import { signOut } from 'next-auth/react'
 import {
   startTransition,
   useRef,
@@ -27,7 +28,10 @@ function SideBar() {
             <Logo reverse />
           </div>
           <AdminMenu />
-          <Button variant="outline">
+          <Button
+            variant="outline"
+            onClick={() => signOut({ callbackUrl: '/auth/signin' })}
+          >
             <LogOutIcon /> 退出登录
           </Button>
         </div>
