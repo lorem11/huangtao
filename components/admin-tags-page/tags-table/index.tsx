@@ -35,7 +35,7 @@ import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
 import { toast } from 'sonner'
 import { Button } from '../../ui/button'
-import { deleteById, getAllTags } from '../actions'
+import { deleteBySlug, getAllTags } from '../actions'
 
 export type Tag = Awaited<ReturnType<typeof getAllTags>>[number]
 
@@ -125,8 +125,8 @@ export default function TagsTable({ data }: { data: Tag[] }) {
                   onClick={() => {
                     console.log('clicked')
                     startTransition(async () => {
-                      const id = row.getValue('id') as string
-                      await deleteById(id)
+                      const slug = row.getValue('slug') as string
+                      await deleteBySlug(slug)
                       startTransition(() => {
                         toast.success('删除成功')
                         setOpen(false)

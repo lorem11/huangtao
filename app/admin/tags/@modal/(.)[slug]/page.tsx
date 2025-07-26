@@ -26,6 +26,7 @@ export default async function Page({
         </DialogHeader>
         <CreateOrUpdateTagForm
           initialValue={{
+            id: tag.id,
             name: tag.name,
             slug: tag.slug,
             icon: tag.icon ?? undefined,

@@ -3,7 +3,6 @@
 import { UploadButton } from '@/components/uploadthing'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import z from 'zod'
 
 import LoadingButton from '@/components/loading-button'
 import { Button } from '@/components/ui/button'
@@ -18,48 +17,48 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { useRouter } from 'next/navigation'
-import { toast } from 'sonner'
 import { useTransition } from 'react'
-import { createTag } from '../actions'
-
-z.config(z.locales.zhCN())
-const formSchema = z.object({
-  name: z.string().min(1, { error: 'name 不能为空' }),
-  slug: z
-    .string()
-    .max(15, { error: '最长不得超过15个字符' })
-    .regex(/^([a-z][a-z0-9]*)(-[a-z0-9]+)*$/, {
-      error: 'slug 只能为" kebab-case "模式！',
-    }),
-  icon: z.url({ protocol: /^https|http$/ }).optional(),
-  iconDark: z.url({ protocol: /^https|http$/ }).optional(),
-})
-
-export type TagForm = z.infer<typeof formSchema>
+import { toast } from 'sonner'
+import { createTag, updateTag } from '../actions'
+import { CreateTagForm, createTagFormSchema, UpdateTagForm } from '../types'
 
 export default function CreateOrUpdateTagForm({
   initialValue,
 }: {
-  initialValue?: TagForm
+  initialValue?: UpdateTagForm
 }) {
+  const isUpdate = !!initialValue
   const router = useRouter()
   const [pending, startTransition] = useTransition()
-  const form = useForm<TagForm>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<CreateTagForm>({
+    resolver: zodResolver(createTagFormSchema),
     defaultValues: initialValue ?? {
       name: '',
       slug: '',
-      icon: '',
-      iconDark: '',
     },
   })
 
-  const isUpdate = !!initialValue
-
-  function onSubmit(data: TagForm) {
-    startTransition(async () => {
-      await createTag(data)
-    })
+  function onSubmit(data: CreateTagForm) {
+    if (isUpdate) {
+      startTransition(async () => {
+        console.log(initialValue)
+        await updateTag({
+          id: initialValue.id,
+          ...data,
+        })
+        startTransition(() => {
+          toast.success('修改成功')
+          router.back()
+        })
+      })
+    } else {
+      startTransition(async () => {
+        await createTag(data)
+        startTransition(() => {
+          toast.success('创建成功')
+        })
+      })
+    }
   }
 
   return (
