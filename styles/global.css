@@ -4,7 +4,14 @@
 @import 'uploadthing/tw/v4';
 @source "../node_modules/@uploadthing/react/dist";
 
-@custom-variant dark (&:is(.dark *));
+@import './theme.css';
+@import './animation.css';
+@import './editor.css';
+@import './github.css';
+@import './github-dark.css';
+@import 'bytemd/dist/index.css';
+
+@custom-variant dark (&: is(.dark *));
 
 @theme {
   --t: 60s;
