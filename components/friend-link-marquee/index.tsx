@@ -13,9 +13,13 @@ export default function FriendLinkMarquee() {
   ))
 
   return (
-    <div className="flex w-full sm:w-3/5 mx-auto overflow-hidden mask-linear-[90deg,#0000,#fff_10%,#fff_90%,#0000] py-4">
-      <div className="flex animate-marquee-first  gap-4">{links}</div>
-      <div className="flex animate-marquee-second  gap-4">{links}</div>
+    <div className="group flex w-full sm:w-3/5 mx-auto overflow-hidden mask-linear-[90deg,#0000,#fff_10%,#fff_90%,#0000] py-4">
+      <div className="flex animate-marquee-first  gap-4 group-hover:[animation-play-state:paused]">
+        {links}
+      </div>
+      <div className="flex animate-marquee-second  gap-4 group-hover:[animation-play-state:paused]">
+        {links}
+      </div>
     </div>
   )
 }

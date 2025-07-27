@@ -7,7 +7,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --t: 100s;
+  --t: 60s;
   --animate-marquee-first: var(--t) linear infinite calc(var(--t) / -2)
     marquee-first;
   --animate-marquee-second: var(--t) linear infinite calc(var(--t) * -1)
