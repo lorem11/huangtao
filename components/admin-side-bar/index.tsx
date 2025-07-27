@@ -4,8 +4,8 @@ import { ChevronLeftIcon, ChevronRightIcon, LogOutIcon } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 import {
   startTransition,
+  useLayoutEffect,
   useRef,
-  useState,
   unstable_ViewTransition as ViewTransition,
 } from 'react'
 import AdminMenu from '../admin-menu'
@@ -40,18 +40,27 @@ function SideBar() {
   )
 }
 
-export default function AdminSideBar() {
-  const [expand, setExpand] = useState(true)
+export default function AdminSideBar({
+  expand,
+  setExpand,
+}: {
+  expand: boolean
+  setExpand: (x: boolean) => void
+}) {
   const expandButtonRef = useRef<HTMLDivElement>(null)
+
+  useLayoutEffect(() => {
+    setExpand(expand)
+  }, [expand, setExpand])
   useReversedTheme(expandButtonRef)
 
   return (
-    <div className="relative h-full">
+    <div className="relative h-screen">
       {expand ? <SideBar /> : null}
       <ViewTransition enter="expand-toggle" exit="expand-toggle">
         <div
           ref={expandButtonRef}
-          className="w-[24px] h-[100px] bg-background absolute right-0 top-[50%] -translate-y-[50%] translate-x-[calc(90%-1px)] rounded-r-lg"
+          className="w-[24px] h-[100px] bg-background absolute right-0 top-1/2 -translate-1/2 translate-x-[calc(90%-1px)] rounded-r-lg"
         >
           <button
             className="text-primary h-full transition-transform"

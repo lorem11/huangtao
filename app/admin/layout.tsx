@@ -1,4 +1,5 @@
 import AdminSideBar from '@/components/admin-side-bar'
+import AdminLayout from '@/components/admin/layout'
 import BreadCrumb from '@/components/breadcrumb'
 import ThemeSwitch from '@/components/liaght-dark-mode-switch'
 import SessionProvider from '@/components/provider/session-provider'
@@ -14,7 +15,7 @@ export default async function Layout({ children }: PropsWithChildren) {
   }
   return (
     <SessionProvider session={session}>
-      <div className="flex h-screen">
+      {/* <div className="flex h-screen">
         <div>
           <AdminSideBar />
         </div>
@@ -27,7 +28,8 @@ export default async function Layout({ children }: PropsWithChildren) {
             {children}
           </main>
         </div>
-      </div>
+      </div> */}
+      <AdminLayout>{children}</AdminLayout>
     </SessionProvider>
   )
 }
