@@ -20,6 +20,7 @@ model Post {
   content   String
   tags      Tag[]
   slug      String   @unique
+  cover     String?
   createdAt DateTime @default(now())
   published Boolean  @default(false)
   updatedAt DateTime @updatedAt

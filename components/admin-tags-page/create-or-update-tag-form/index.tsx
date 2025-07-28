@@ -55,6 +55,7 @@ export default function CreateOrUpdateTagForm({
       startTransition(async () => {
         await createTag(data)
         startTransition(() => {
+          form.reset()
           toast.success('创建成功')
         })
       })
@@ -65,7 +66,7 @@ export default function CreateOrUpdateTagForm({
     <>
       {!isUpdate && <h1>添加标签</h1>}
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form onSubmit={form.handleSubmit(onSubmit)} autoComplete="off">
           <div className="flex w-full gap-5">
             <div className="flex-1">
               <FormField

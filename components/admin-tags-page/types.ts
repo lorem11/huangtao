@@ -5,7 +5,7 @@ export const createTagFormSchema = z.object({
   name: z.string().min(1, { error: 'name 不能为空' }),
   slug: z
     .string()
-    .max(15, { error: '最长不得超过15个字符' })
+    .max(30, { error: '最长不得超过15个字符' })
     .regex(/^([a-z][a-z0-9]*)(-[a-z0-9]+)*$/, {
       error: 'slug 只能为" kebab-case "模式！',
     }),

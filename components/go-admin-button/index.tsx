@@ -4,7 +4,7 @@ import { Button } from '../ui/button'
 
 export default function GoAdminButton() {
   return (
-    <Link href="/admin">
+    <Link href="/admin" target="_blank">
       <Button variant="outline" size="icon">
         <UserLockIcon className="h-[1.2rem] w-[1.2rem]" />
       </Button>

@@ -21,7 +21,7 @@ function SideBar() {
     <ViewTransition enter="slide-in" exit="slide-out">
       <aside
         ref={ref}
-        className="h-[96vh] w-[400px] border rounded-r-[3rem] translate-y-[2vh] relative bg-background text-primary"
+        className="h-[calc(100vh-40px)] w-[400px] border rounded-r-[3rem] translate-y-[20px] relative bg-background text-primary"
       >
         <div className="p-4 flex flex-col items-center gap-4 h-full justify-around">
           <div className="scale-125">
