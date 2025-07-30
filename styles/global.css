@@ -13,15 +13,6 @@
 
 @custom-variant dark (&: is(.dark *));
 
-@theme {
-  --t: 60s;
-  --animate-marquee-first: var(--t) linear infinite calc(var(--t) / -2)
-    marquee-first;
-  --animate-marquee-second: var(--t) linear infinite calc(var(--t) * -1)
-    marquee-second;
-  --animate-spin: 1s linear infinite spin;
-}
-
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);

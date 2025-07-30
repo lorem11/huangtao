@@ -32,6 +32,28 @@
   /* 新状态默认为空白或淡入 */
 }
 
+@theme {
+  --t: 60s;
+  --animate-marquee-first: var(--t) linear infinite calc(var(--t) / -2)
+    marquee-first;
+  --animate-marquee-second: var(--t) linear infinite calc(var(--t) * -1)
+    marquee-second;
+  --animate-spin: 1s linear infinite spin;
+  --animate-blink: 1s step-end infinite cursor;
+}
+
+@keyframes cursor {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 @keyframes slide-in-from-left {
   from {
     transform: translateX(-100%);
@@ -58,18 +80,17 @@
   0% {
     transform: translateX(100%);
   }
-  
+
   100% {
     transform: translateX(-100%);
   }
-  
 }
 
 @keyframes marquee-second {
   0% {
     transform: translateX(0);
   }
-  
+
   100% {
     transform: translateX(-200%);
   }
