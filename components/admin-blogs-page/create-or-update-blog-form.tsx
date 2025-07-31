@@ -1,10 +1,12 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRef, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { getAllTags } from '../admin-tags-page/actions'
 import LoadingButton from '../loading-button'
+import Tag from '../tag'
 import {
   Form,
   FormControl,
@@ -14,12 +16,12 @@ import {
   FormMessage,
 } from '../ui/form'
 import { Input } from '../ui/input'
+import { MutipleSelector } from '../ui/multiple-selector'
 import { Switch } from '../ui/switch'
 import { UploadButton } from '../uploadthing'
+import { createBlog } from './actions'
 import MyEditor from './my-editor'
 import { CreateBlogForm, createBlogSchema, UpdateBlogForm } from './types'
-import { MutipleSelector } from '../ui/multiple-selector'
-import Tag from '../tag'
 
 export default function CreateOrUpdateBlogForm({
   initialValue,
@@ -29,6 +31,8 @@ export default function CreateOrUpdateBlogForm({
   tags: Awaited<ReturnType<typeof getAllTags>>
 }) {
   const isUpdate = !!initialValue
+  const ref = useRef<HTMLFormElement>(null)
+  const [isPending, startTransition] = useTransition()
   const form = useForm<CreateBlogForm>({
     resolver: zodResolver(createBlogSchema),
     defaultValues: initialValue ?? {
@@ -40,13 +44,19 @@ export default function CreateOrUpdateBlogForm({
     },
   })
 
-  function onSubmit(values: CreateBlogForm) {
-    console.log(values)
-  }
-
   return (
     <Form {...form}>
-      <form autoComplete="off" onSubmit={form.handleSubmit(onSubmit)}>
+      <form
+        autoComplete="off"
+        onSubmit={form.handleSubmit((data) =>
+          startTransition(async () => {
+            await createBlog(data)
+            toast.success('创建成功')
+            form.reset()
+          })
+        )}
+        ref={ref}
+      >
         <div className="grid gap-5">
           <FormField
             control={form.control}
@@ -181,7 +191,7 @@ export default function CreateOrUpdateBlogForm({
           <LoadingButton
             className="mt-5 border w-fit"
             type="submit"
-            pending={false}
+            pending={isPending}
           >
             {isUpdate ? '确认修改' : '创建'}
           </LoadingButton>
