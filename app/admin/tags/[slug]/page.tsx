@@ -18,6 +18,7 @@ export default async function Page({
       <h1>编辑标签</h1>
       <CreateOrUpdateTagForm
         initialValue={{
+          id: tag.id,
           name: tag.name,
           slug: tag.slug,
           icon: tag.icon ?? undefined,
