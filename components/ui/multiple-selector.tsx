@@ -3,7 +3,7 @@
 import { cn } from '@/lib/utils'
 import { CommandInput } from 'cmdk'
 import { XIcon } from 'lucide-react'
-import { KeyboardEvent, ReactNode, useRef, useState } from 'react'
+import { KeyboardEvent, ReactNode, useEffect, useRef, useState } from 'react'
 import { Command, CommandItem, CommandList } from '../ui/command'
 
 /**
@@ -23,8 +23,16 @@ export function MutipleSelector<T, U>({
   onChange: (values: U[]) => void
 }) {
   const inputRef = useRef<HTMLInputElement>(null)
-
   const [open, setOpen] = useState(false)
+  const [renderdedOption, setRenderedOption] = useState<T[]>([])
+
+  useEffect(() => {
+    const filterd = options.filter(
+      (option) => !values.includes(valueGetter(option))
+    )
+    setRenderedOption(filterd)
+  }, [values, options, valueGetter])
+
   const map = options.reduce((p, c) => p.set(valueGetter(c), c), new Map())
   const renderedValues = values.map((value) => optionRenderer(map.get(value)))
 
@@ -53,14 +61,14 @@ export function MutipleSelector<T, U>({
           placeholder="键入搜索"
           ref={inputRef}
           className={cn(
-            'flex-1 self-baseline bg-transparent outline-none placeholder:text-muted-foreground',
+            'flex-1 self-baseline bg-transparent outline-none placeholder:text-muted-foreground h-full',
             values.length && 'ml-2'
           )}
         />
         <div className="absolute w-full bottom-0 translate-y-[calc(100%+10px)] bg-popover z-10 -translate-x-3 rounded-lg">
           {open && (
             <CommandList>
-              {options.map((option, idx) => (
+              {renderdedOption.map((option, idx) => (
                 <CommandItem
                   key={idx}
                   onSelect={() => onChange([...values, valueGetter(option)])}

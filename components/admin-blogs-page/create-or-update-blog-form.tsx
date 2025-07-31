@@ -3,6 +3,8 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
+import { getAllTags } from '../admin-tags-page/actions'
+import LoadingButton from '../loading-button'
 import {
   Form,
   FormControl,
@@ -16,12 +18,15 @@ import { Switch } from '../ui/switch'
 import { UploadButton } from '../uploadthing'
 import MyEditor from './my-editor'
 import { CreateBlogForm, createBlogSchema, UpdateBlogForm } from './types'
-import LoadingButton from '../loading-button'
+import { MutipleSelector } from '../ui/multiple-selector'
+import Tag from '../tag'
 
 export default function CreateOrUpdateBlogForm({
   initialValue,
+  tags,
 }: {
   initialValue?: UpdateBlogForm
+  tags: Awaited<ReturnType<typeof getAllTags>>
 }) {
   const isUpdate = !!initialValue
   const form = useForm<CreateBlogForm>({
@@ -83,6 +88,36 @@ export default function CreateOrUpdateBlogForm({
                 <FormMessage />
               </FormItem>
             )}
+          ></FormField>
+
+          <FormField
+            control={form.control}
+            name="tags"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormLabel>标签</FormLabel>
+                  <FormControl>
+                    <MutipleSelector
+                      options={tags}
+                      optionRenderer={(option) => {
+                        return (
+                          <Tag
+                            name={option.name}
+                            icon={option.icon ?? void 0}
+                            iconDark={option.iconDark ?? void 0}
+                          />
+                        )
+                      }}
+                      values={field.value!}
+                      onChange={field.onChange}
+                      valueGetter={(x) => x.id}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )
+            }}
           ></FormField>
 
           <div className="flex w-full gap-10">
@@ -156,7 +191,9 @@ export default function CreateOrUpdateBlogForm({
             name="content"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>文章内容</FormLabel>
+                <FormLabel>
+                  文章内容<span className="text-red-500 font-bold">*</span>
+                </FormLabel>
                 <FormControl>
                   <MyEditor value={field.value} onChange={field.onChange} />
                 </FormControl>
