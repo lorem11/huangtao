@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRef, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import { getAllTags } from '../admin-tags-page/actions'
+import { TagVO } from '../admin-tags-page/types'
 import LoadingButton from '../loading-button'
 import Tag from '../tag'
 import {
@@ -28,7 +28,7 @@ export default function CreateOrUpdateBlogForm({
   tags,
 }: {
   initialValue?: UpdateBlogForm
-  tags: Awaited<ReturnType<typeof getAllTags>>
+  tags: TagVO[]
 }) {
   const isUpdate = !!initialValue
   const ref = useRef<HTMLFormElement>(null)

@@ -1,4 +1,5 @@
 import z from 'zod'
+import { getAllTags } from './actions'
 
 z.config(z.locales.zhCN())
 export const createTagFormSchema = z.object({
@@ -18,3 +19,4 @@ export const updateTagFormSchema = createTagFormSchema.extend({
 
 export type CreateTagForm = z.infer<typeof createTagFormSchema>
 export type UpdateTagForm = z.infer<typeof updateTagFormSchema>
+export type TagVO = Awaited<ReturnType<typeof getAllTags>>[number]

@@ -35,16 +35,15 @@ import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
 import { toast } from 'sonner'
 import { Button } from '../../ui/button'
-import { deleteBySlug, getAllTags } from '../actions'
+import { deleteBySlug } from '../actions'
+import { TagVO } from '../types'
 
-export type Tag = Awaited<ReturnType<typeof getAllTags>>[number]
-
-export default function TagsTable({ data }: { data: Tag[] }) {
+export default function TagsTable({ data }: { data: TagVO[] }) {
   const [pending, startTransition] = useTransition()
   const router = useRouter()
   const [open, setOpen] = useState(false)
 
-  const columns: ColumnDef<Tag>[] = [
+  const columns: ColumnDef<TagVO>[] = [
     {
       accessorKey: 'name',
       header: '标签名称',
