@@ -17,7 +17,7 @@ export function MutipleSelector<T, U>({
   onChange,
 }: {
   options: T[]
-  optionRenderer: (x: T) => ReactNode
+  optionRenderer: (x: T, key: U) => ReactNode
   values: U[]
   valueGetter: (x: T) => U
   onChange: (values: U[]) => void
@@ -34,7 +34,9 @@ export function MutipleSelector<T, U>({
   }, [values, options, valueGetter])
 
   const map = options.reduce((p, c) => p.set(valueGetter(c), c), new Map())
-  const renderedValues = values.map((value) => optionRenderer(map.get(value)))
+  const renderedValues = values.map((value) =>
+    optionRenderer(map.get(value), value)
+  )
 
   function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
     const input = inputRef.current
@@ -77,7 +79,7 @@ export function MutipleSelector<T, U>({
                     e.stopPropagation()
                   }}
                 >
-                  {optionRenderer(option)}
+                  {optionRenderer(option, valueGetter(option))}
                 </CommandItem>
               ))}
             </CommandList>

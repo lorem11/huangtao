@@ -110,9 +110,10 @@ export default function CreateOrUpdateBlogForm({
                   <FormControl>
                     <MutipleSelector
                       options={tags}
-                      optionRenderer={(option) => {
+                      optionRenderer={(option, key) => {
                         return (
                           <Tag
+                            key={key}
                             name={option.name}
                             icon={option.icon ?? void 0}
                             iconDark={option.iconDark ?? void 0}

@@ -24,7 +24,7 @@ export default function ThemeSwitch() {
     >
       <div
         className={cn(
-          'w-5 h-5 rounded-[10px] absolute top-[50%] -translate-y-[50%] transition-transform',
+          'w-5 h-5 rounded-[10px] absolute top-1/2 -translate-y-1/2 transition-transform',
           resolvedTheme === 'light'
             ? 'translate-x-[2px]'
             : 'translate-x-[27px]',
@@ -32,9 +32,9 @@ export default function ThemeSwitch() {
         )}
       >
         {resolvedTheme === 'light' ? (
-          <SunIcon className="w-3 h-3 absolute top-[50%] left-[50%] -translate-[50%]" />
+          <SunIcon className="w-3 h-3 absolute top-1/2 left-1/2 -translate-1/2" />
         ) : (
-          <MoonIcon className="w-3 h-3 absolute top-[50%] left-[50%] -translate-[50%]" />
+          <MoonIcon className="w-3 h-3 absolute top-1/2 left-1/2 -translate-1/2" />
         )}
       </div>
     </div>
