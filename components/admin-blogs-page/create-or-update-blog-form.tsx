@@ -37,6 +37,7 @@ export default function CreateOrUpdateBlogForm({
     resolver: zodResolver(createBlogSchema),
     defaultValues: initialValue ?? {
       title: '',
+      desc: '',
       slug: '',
       content: '',
       tags: [],
@@ -81,6 +82,27 @@ export default function CreateOrUpdateBlogForm({
 
           <FormField
             control={form.control}
+            name="desc"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel htmlFor="title">
+                  描述<span className="text-red-500 font-bold">*</span>
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    id="title"
+                    placeholder="本文主要说明了..."
+                    {...field}
+                    {...form.register('desc')}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          ></FormField>
+
+          <FormField
+            control={form.control}
             name="slug"
             render={({ field }) => (
               <FormItem>
@@ -106,7 +128,9 @@ export default function CreateOrUpdateBlogForm({
             render={({ field }) => {
               return (
                 <FormItem>
-                  <FormLabel>标签</FormLabel>
+                  <FormLabel>
+                    标签<span className="text-red-500 font-bold">*</span>
+                  </FormLabel>
                   <FormControl>
                     <MutipleSelector
                       options={tags}
@@ -115,8 +139,8 @@ export default function CreateOrUpdateBlogForm({
                           <Tag
                             key={key}
                             name={option.name}
-                            icon={option.icon ?? void 0}
-                            iconDark={option.iconDark ?? void 0}
+                            icon={option.icon}
+                            iconDark={option.iconDark}
                           />
                         )
                       }}

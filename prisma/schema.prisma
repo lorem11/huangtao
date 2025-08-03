@@ -17,6 +17,7 @@ datasource db {
 model Post {
   id        String   @id @default(cuid())
   title     String   @unique @db.VarChar(255)
+  desc      String
   content   String
   tags      Tag[]
   slug      String   @unique
