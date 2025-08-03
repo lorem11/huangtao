@@ -25,9 +25,37 @@ export async function getAllBlogItem() {
   })
 }
 
+export async function getAllSlug() {
+  const slugs = await prisma.post.findMany({
+    select: {
+      slug: true,
+    },
+  })
+
+  return slugs
+}
+
+export async function getBlogBySlug(slug: string) {
+  const blog = await prisma.post.findUnique({
+    where: {
+      slug,
+    },
+    select: {
+      title: true,
+      content: true,
+      updatedAt: true,
+    },
+  })
+
+  if (!blog) {
+    return { err: 'NOT_FOUND' }
+  }
+
+  return { blog }
+}
+
 export async function createBlog(params: CreateBlogForm) {
   const { tags, ...data } = params
-  console.log(tags)
   await prisma.post.create({
     data: {
       ...data,
