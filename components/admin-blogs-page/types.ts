@@ -1,5 +1,5 @@
 import z from 'zod'
-import { getAllBlogItem } from './actions'
+import { getAllBlogItem, getBlogBySlug } from './actions'
 
 z.config(z.locales.zhCN())
 export const createBlogSchema = z.object({
@@ -21,3 +21,10 @@ export const updateBlogFormSchema = createBlogSchema.extend({ id: z.string() })
 export type CreateBlogForm = z.infer<typeof createBlogSchema>
 export type UpdateBlogForm = z.infer<typeof updateBlogFormSchema>
 export type BlogItemVO = Awaited<ReturnType<typeof getAllBlogItem>>[number]
+export type BlogVO = Exclude<
+  Awaited<ReturnType<typeof getBlogBySlug>>,
+  {
+    err: string
+    blog?: undefined
+  }
+>['blog']

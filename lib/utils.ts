@@ -34,6 +34,8 @@ export function throttle<T extends (...args: unknown[]) => unknown>(
   return (...args: unknown[]) => {
     if (Date.now() - last > duration) {
       last = Date.now()
+      // eslint-disable-next-line
+      // @ts-ignore
       fn.apply(this, args)
     }
   }

@@ -12,9 +12,8 @@ export default function BackToTop() {
 
   useEffect(() => {
     const handler = throttle(() => {
-      console.log('scrollY: ', scrollY)
       setVisible(scrollY > 20)
-    })
+    }, 50)
     window.addEventListener('scroll', handler)
     return () => {
       window.removeEventListener('scroll', handler)

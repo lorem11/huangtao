@@ -36,7 +36,6 @@ export async function createTag(data: CreateTagForm) {
 }
 
 export async function updateTag(params: UpdateTagForm) {
-  console.log(params)
   const { id, ...data } = params
 
   const tag = await prisma.tag.update({

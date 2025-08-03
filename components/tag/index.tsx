@@ -10,24 +10,38 @@ export default function Tag({
   iconDark,
 }: {
   name: string
-  icon?: string
-  iconDark?: string
+  icon: string | null
+  iconDark: string | null
 }) {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const [url, setURL] = useState<string | null>(null)
 
-  useEffect(() => setMounted(true), [])
+  useEffect(() => {
+    setMounted(true)
+    if (resolvedTheme === 'light') {
+      setURL(icon ?? iconDark)
+    }
+
+    if (resolvedTheme === 'dark') {
+      setURL(icon ?? iconDark)
+    }
+  }, [resolvedTheme, icon, iconDark])
 
   if (!mounted) return null
 
   return (
-    <div className="flex gap-2 items-center w-fit border p-1 rounded-[20px] bg-accent">
-      # {name}{' '}
-      {icon && resolvedTheme === 'light' && (
-        <Image src={icon} width={24} height={24} alt="" unoptimized />
-      )}{' '}
-      {iconDark && resolvedTheme === 'dark' && (
-        <Image src={iconDark} width={24} height={24} alt="" unoptimized />
+    <div className="flex items-center w-fit border px-1 rounded-md bg-accent">
+      <span className="leading-tight"># {name}</span>
+      {url && (
+        <Image
+          className="ml-2"
+          src={url}
+          width={20}
+          height={20}
+          alt=""
+          unoptimized
+        />
       )}
     </div>
   )

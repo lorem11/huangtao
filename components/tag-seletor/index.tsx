@@ -19,11 +19,7 @@ export default async function TagSelector({
       values={values!}
       onChange={onChange}
       optionRenderer={(option) => (
-        <Tag
-          name={option.name}
-          icon={option.icon ?? void 0}
-          iconDark={option.iconDark ?? void 0}
-        />
+        <Tag name={option.name} icon={option.icon} iconDark={option.iconDark} />
       )}
     />
   )

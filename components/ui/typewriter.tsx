@@ -1,7 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { animate, motion, useMotionValue, useTransform } from 'motion/react'
+import {
+  animate,
+  motion,
+  useMotionValue,
+  useTransform,
+  Variants,
+} from 'motion/react'
 
 export interface ITypewriterProps {
   delay: number
@@ -111,7 +117,7 @@ const cursorVariants = {
 function BlinkingCursor() {
   return (
     <motion.div
-      variants={cursorVariants}
+      variants={cursorVariants as Variants}
       animate="blinking"
       className="inline-block h-10 ml-2 w-[3px] translate-y-1 bg-primary"
     />

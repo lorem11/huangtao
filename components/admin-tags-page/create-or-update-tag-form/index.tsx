@@ -41,7 +41,6 @@ export default function CreateOrUpdateTagForm({
   function onSubmit(data: CreateTagForm) {
     if (isUpdate) {
       startTransition(async () => {
-        console.log(initialValue)
         await updateTag({
           id: initialValue.id,
           ...data,

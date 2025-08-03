@@ -122,7 +122,6 @@ export default function TagsTable({ data }: { data: TagVO[] }) {
                 <LoadingButton
                   pending={pending}
                   onClick={() => {
-                    console.log('clicked')
                     startTransition(async () => {
                       const slug = row.getValue('slug') as string
                       await deleteBySlug(slug)
