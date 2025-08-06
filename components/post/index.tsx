@@ -1,11 +1,11 @@
 'use client'
-import { Viewer } from '@bytemd/react'
-import { BlogVO } from '../admin-blogs-page/types'
+import { formatDate } from '@/lib/utils'
 import gfm from '@bytemd/plugin-gfm'
 import highlight from '@bytemd/plugin-highlight'
-import { Calendar1Icon } from 'lucide-react'
-import { formatDate } from '@/lib/utils'
+import { Viewer } from '@bytemd/react'
 import type { BytemdPlugin } from 'bytemd'
+import { ClockIcon } from 'lucide-react'
+import { BlogVO } from '../admin-blogs-page/types'
 import TOC, { Heading } from '../toc'
 
 const pluginToc = (): BytemdPlugin => {
@@ -43,7 +43,7 @@ export default function Post({ title, content, updatedAt }: BlogVO) {
     <>
       <h1 className="mb-10 !text-4xl">{title}</h1>
       <p className="mb-5 flex items-center">
-        最后更新： <Calendar1Icon className="mr-2 w-4 h-4" />{' '}
+        最后更新： <ClockIcon className="mr-2 w-4 h-4" />{' '}
         {formatDate(updatedAt)}
       </p>
       <TOC headings={headings} className="fixed top-[100px] right-1/6" />
