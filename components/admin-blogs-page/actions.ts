@@ -1,7 +1,20 @@
 'use server'
 
 import prisma from '@/lib/prisma'
+import { UTApi } from 'uploadthing/server'
 import { CreateBlogForm } from './types'
+
+const utapi = new UTApi({ token: process.env.UPLOADTHING_TOKEN })
+
+export async function uploadImage(formData: FormData) {
+  const file = formData.get('file') as File
+  const resp = await utapi.uploadFiles(file)
+
+  if (!resp.data) {
+    return { error: resp.error }
+  }
+  return { url: resp.data.ufsUrl }
+}
 
 export async function getAllBlogItem() {
   return await prisma.post.findMany({

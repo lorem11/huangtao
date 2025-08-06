@@ -1,5 +1,5 @@
 import { formatDate } from '@/lib/utils'
-import { CalendarIcon } from 'lucide-react'
+import { ClockIcon } from 'lucide-react'
 import Link from 'next/link'
 import { BlogItemVO } from '../admin-blogs-page/types'
 import Tag from '../tag'
@@ -24,7 +24,7 @@ export default function BlogListItem({
         <h2 className="text-lg font-bold">{title}</h2>
         <p className="!text-sm text-gray-400 dark:text-gray-200">{desc}</p>
         <div className="flex justify-end items-center">
-          <CalendarIcon className="mr-2 w-4 h-4" /> {formatDate(createdAt)}
+          <ClockIcon className="mr-2 w-4 h-4" /> {formatDate(createdAt)}
         </div>
       </div>
     </Link>
