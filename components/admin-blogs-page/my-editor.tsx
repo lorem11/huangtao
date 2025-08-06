@@ -16,14 +16,18 @@ export default function MyEditor({ value, onChange }: PropsType) {
     const file = files[0]
     const formData = new FormData()
     formData.set('file', file)
-    toast.info('上传中', { duration: Infinity })
+    const toastId = toast('uploading-state')
+    toast.info('上传中', { duration: Infinity, id: toastId })
     const { url, error } = await uploadImage(formData)
 
     if (url) {
-      toast.dismiss()
+      toast.success('上传成功', { id: toastId })
+      setTimeout(() => toast.dismiss(), 1000)
       return [{ url }]
     }
 
+    toast.error(`上传失败, 错误：${error}`, { id: toastId })
+    setTimeout(() => toast.dismiss(), 1000)
     return []
   }
 
