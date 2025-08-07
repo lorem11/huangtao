@@ -25,6 +25,10 @@ const segmap: { [x: string]: { label: string; path: string } } = {
     label: '博客管理',
     path: '/admin/blogs',
   },
+  all: {
+    label: '所有文章',
+    path: '/admin/blogs/all',
+  },
   tags: {
     label: '标签管理',
     path: '/admin/tags',

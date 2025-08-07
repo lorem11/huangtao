@@ -1,5 +1,5 @@
 import z from 'zod'
-import { getAllBlogItem, getBlogBySlug } from './actions'
+import { getAllBlogItem, getAllBlogs4Table, getBlogBySlug } from './actions'
 
 z.config(z.locales.zhCN())
 export const createBlogSchema = z.object({
@@ -28,3 +28,4 @@ export type BlogVO = Exclude<
     blog?: undefined
   }
 >['blog']
+export type BlogTableVO = Awaited<ReturnType<typeof getAllBlogs4Table>>[number]

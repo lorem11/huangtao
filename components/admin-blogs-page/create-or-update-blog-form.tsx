@@ -19,9 +19,12 @@ import { Input } from '../ui/input'
 import { MutipleSelector } from '../ui/multiple-selector'
 import { Switch } from '../ui/switch'
 import { UploadButton } from '../uploadthing'
-import { createBlog } from './actions'
+import { createBlog, updateBlog } from './actions'
 import MyEditor from './my-editor'
 import { CreateBlogForm, createBlogSchema, UpdateBlogForm } from './types'
+import Link from 'next/link'
+import { Button } from '../ui/button'
+import { useRouter } from 'next/navigation'
 
 export default function CreateOrUpdateBlogForm({
   initialValue,
@@ -30,6 +33,7 @@ export default function CreateOrUpdateBlogForm({
   initialValue?: UpdateBlogForm
   tags: TagVO[]
 }) {
+  const router = useRouter()
   const isUpdate = !!initialValue
   const ref = useRef<HTMLFormElement>(null)
   const [isPending, startTransition] = useTransition()
@@ -51,9 +55,14 @@ export default function CreateOrUpdateBlogForm({
         autoComplete="off"
         onSubmit={form.handleSubmit((data) =>
           startTransition(async () => {
-            await createBlog(data)
-            toast.success('创建成功')
-            form.reset()
+            const p = initialValue
+              ? updateBlog({ id: initialValue.id, ...data })
+              : createBlog(data)
+            await p
+            toast.success(initialValue ? '更新成功' : '创建成功')
+
+            // eslint-disable-next-line
+            initialValue ? router.back() : form.reset()
           })
         )}
         ref={ref}
@@ -213,13 +222,19 @@ export default function CreateOrUpdateBlogForm({
             ></FormField>
           </div>
 
-          <LoadingButton
-            className="mt-5 border w-fit"
-            type="submit"
-            pending={isPending}
-          >
-            {isUpdate ? '确认修改' : '创建'}
-          </LoadingButton>
+          <div className="flex items-center">
+            <LoadingButton
+              className="mt-5 border w-fit"
+              type="submit"
+              pending={isPending}
+            >
+              {isUpdate ? '确认修改' : '创建'}
+            </LoadingButton>
+
+            <Button className="ml-5 mt-5" variant="link" asChild>
+              <Link href="/admin/blogs/all">所有文章</Link>
+            </Button>
+          </div>
 
           <FormField
             control={form.control}
