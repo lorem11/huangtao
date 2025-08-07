@@ -55,14 +55,14 @@ export default function CreateOrUpdateBlogForm({
         autoComplete="off"
         onSubmit={form.handleSubmit((data) =>
           startTransition(async () => {
-            const p = initialValue
+            const p = isUpdate
               ? updateBlog({ id: initialValue.id, ...data })
               : createBlog(data)
             await p
-            toast.success(initialValue ? '更新成功' : '创建成功')
+            toast.success(isUpdate ? '更新成功' : '创建成功')
 
             // eslint-disable-next-line
-            initialValue ? router.back() : form.reset()
+            isUpdate ? router.back() : form.reset()
           })
         )}
         ref={ref}
@@ -227,8 +227,9 @@ export default function CreateOrUpdateBlogForm({
               className="mt-5 border w-fit"
               type="submit"
               pending={isPending}
+              {...(isUpdate && { disabled: form.formState.isDirty })}
             >
-              {isUpdate ? '确认修改' : '创建'}
+              {isUpdate ? '确认修改' : '创建文章'}
             </LoadingButton>
 
             <Button className="ml-5 mt-5" variant="link" asChild>

@@ -201,6 +201,7 @@ export default function CreateOrUpdateTagForm({
             className="mt-5 border"
             type="submit"
             pending={pending}
+            {...(isUpdate && { disabled: form.formState.isDirty })}
           >
             {isUpdate ? '确认修改' : '添加标签'}
           </LoadingButton>
