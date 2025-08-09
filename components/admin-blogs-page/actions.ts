@@ -7,6 +7,22 @@ import { CreateBlogForm, UpdateBlogForm } from './types'
 
 const utapi = new UTApi({ token: process.env.UPLOADTHING_TOKEN })
 
+export async function getTitleAndDescBySlug(slug: string) {
+  const res = await prisma.post.findUnique({
+    where: { slug },
+    select: {
+      title: true,
+      desc: true,
+    },
+  })
+
+  if (!res) {
+    throw new Error('文章不存在')
+  }
+
+  return res
+}
+
 export async function uploadImage(formData: FormData) {
   const file = formData.get('file') as File
   const resp = await utapi.uploadFiles(file)
