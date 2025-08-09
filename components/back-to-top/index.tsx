@@ -24,7 +24,7 @@ export default function BackToTop() {
     <>
       {visible && (
         <button
-          className="fixed right-20 bottom-20 bg-accent rounded-[50%] p-1"
+          className="fixed right-5 bottom-5 sm:right-20 sm:bottom-20 bg-accent rounded-[50%] p-1"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           <ArrowUp className="w-8 h-8" />

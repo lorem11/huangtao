@@ -46,7 +46,10 @@ export default function Post({ title, content, updatedAt }: BlogVO) {
         最后更新： <ClockIcon className="mr-2 w-4 h-4" />{' '}
         {formatDate(updatedAt)}
       </p>
-      <TOC headings={headings} className="fixed top-[100px] right-1/6" />
+      <TOC
+        headings={headings}
+        className="hidden sm:block fixed top-[100px] right-1/6"
+      />
       <article>
         <Viewer value={content} plugins={plugins} />
       </article>
