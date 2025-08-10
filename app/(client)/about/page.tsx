@@ -34,7 +34,7 @@ export default function Page() {
                   <strong>React 或者 Next.js</strong>
                   相关的工作。这里是我的
                   <strong>
-                    <Link href="#">在线简历。</Link>
+                    <Link href="https://r.easycv.cn/huangtao">在线简历。</Link>
                   </strong>
                 </p>
                 <p>

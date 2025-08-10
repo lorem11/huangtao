@@ -34,7 +34,7 @@ export default function NavigationBar() {
   return (
     <header className="w-full sticky top-0 backdrop-blur transition-all border-x-0  flex flex-row-reverse sm:flex-row justify-between sm:justify-center z-10 items-center border-b py-4">
       <div className="sm:mr-[auto]">
-        <Logo />
+        <Logo width={1024 / 6} height={250 / 6} />
       </div>
 
       <ul className="hidden gap-x-8 text-lg sm:flex">

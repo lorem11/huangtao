@@ -3,11 +3,17 @@
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import Link from 'next/link'
-import { PropsWithChildren, useLayoutEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 
 export default function Logo({
   reverse,
-}: PropsWithChildren<{ reverse?: boolean }>) {
+  width,
+  height,
+}: {
+  reverse?: boolean
+  width: number
+  height: number
+}) {
   const { resolvedTheme } = useTheme()
   const [img, setImg] = useState(<></>)
 
@@ -19,15 +25,15 @@ export default function Logo({
           <Image
             src="/signature-en-dark.gif"
             alt="logo"
-            width={164}
-            height={40}
+            width={width}
+            height={height}
           />
         ) : (
           <Image
             src="/signature-en-light.gif"
             alt="logo"
-            width={164}
-            height={40}
+            width={width}
+            height={height}
           />
         )
     } else {
@@ -36,20 +42,20 @@ export default function Logo({
           <Image
             src="/signature-en-light.gif"
             alt="logo"
-            width={164}
-            height={40}
+            width={width}
+            height={height}
           />
         ) : (
           <Image
             src="/signature-en-dark.gif"
             alt="logo"
-            width={164}
-            height={40}
+            width={width}
+            height={height}
           />
         )
     }
     setImg(img)
-  }, [resolvedTheme, reverse])
+  }, [resolvedTheme, reverse, width, height])
 
   return <Link href="/">{img}</Link>
 }
