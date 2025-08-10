@@ -2,6 +2,7 @@
 import { formatDate } from '@/lib/utils'
 import gfm from '@bytemd/plugin-gfm'
 import highlight from '@bytemd/plugin-highlight'
+import mediumZoom from '@bytemd/plugin-medium-zoom'
 import { Viewer } from '@bytemd/react'
 import type { BytemdPlugin } from 'bytemd'
 import { ClockIcon } from 'lucide-react'
@@ -18,7 +19,7 @@ const pluginToc = (): BytemdPlugin => {
     },
   }
 }
-const plugins = [gfm(), highlight(), pluginToc()]
+const plugins = [gfm(), highlight(), pluginToc(), mediumZoom()]
 
 function extractMarkdownToc(markdown: string): Heading[] {
   const lines = markdown.split('\n')
