@@ -25,7 +25,7 @@ function SideBar() {
       >
         <div className="p-4 flex flex-col items-center gap-4 h-full justify-around">
           <div className="scale-125">
-            <Logo reverse />
+            <Logo reverse width={1024 / 4} height={250 / 4} />
           </div>
           <AdminMenu />
           <Button
