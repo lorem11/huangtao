@@ -16,20 +16,40 @@ export default function Logo({
     if (reverse) {
       img =
         resolvedTheme === 'light' ? (
-          <Image src="/signature-dark.png" alt="logo" width={164} height={40} />
+          <Image
+            src="/signature-en-dark.gif"
+            alt="logo"
+            width={164}
+            height={40}
+          />
         ) : (
-          <Image src="/signature.png" alt="logo" width={164} height={40} />
+          <Image
+            src="/signature-en-light.gif"
+            alt="logo"
+            width={164}
+            height={40}
+          />
         )
     } else {
       img =
         resolvedTheme === 'light' ? (
-          <Image src="/signature.png" alt="logo" width={164} height={40} />
+          <Image
+            src="/signature-en-light.gif"
+            alt="logo"
+            width={164}
+            height={40}
+          />
         ) : (
-          <Image src="/signature-dark.png" alt="logo" width={164} height={40} />
+          <Image
+            src="/signature-en-dark.gif"
+            alt="logo"
+            width={164}
+            height={40}
+          />
         )
     }
     setImg(img)
-  }, [resolvedTheme])
+  }, [resolvedTheme, reverse])
 
   return <Link href="/">{img}</Link>
 }
