@@ -20,12 +20,14 @@ export default function Signature() {
           width={1024 / 3}
           height={250 / 3}
           alt="#"
+          unoptimized
         />
         <Image
           src="/signature-en-light.gif"
           width={1024 / 3}
           height={250 / 3}
           alt="#"
+          unoptimized
         />
       </>
     ) : (
@@ -35,12 +37,14 @@ export default function Signature() {
           width={1024 / 3}
           height={1024 / 3}
           alt="#"
+          unoptimized
         />
         <Image
           src="/signature-en-dark.gif"
           width={1024 / 3}
           height={1024 / 3}
           alt="#"
+          unoptimized
         />
       </>
     )

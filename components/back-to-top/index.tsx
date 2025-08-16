@@ -12,7 +12,7 @@ export default function BackToTop() {
 
   useEffect(() => {
     const handler = throttle(() => {
-      setVisible(scrollY > 20)
+      setVisible(scrollY > 70)
     }, 50)
     window.addEventListener('scroll', handler)
     return () => {
@@ -24,7 +24,7 @@ export default function BackToTop() {
     <>
       {visible && (
         <button
-          className="fixed right-5 bottom-5 sm:right-20 sm:bottom-20 bg-accent rounded-[50%] p-1"
+          className="fixed right-5 bottom-5 sm:right-20 sm:bottom-20 bg-card rounded-[50%] p-1"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           <ArrowUp className="w-8 h-8" />

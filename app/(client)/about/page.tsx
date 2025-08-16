@@ -20,7 +20,7 @@ export default function Page() {
   return (
     <>
       <h1 className="text-4xl font-bold mb-2">关于 huangtao</h1>
-      <div className="h-[calc(80vh-60px)] flex">
+      <div className="min-h-[calc(100vh-100px)] flex">
         <section className="my-auto w-full border p-4 rounded-xl text-lg">
           <Accordion type="single" className="w-full">
             <AccordionItem value="item-1">
